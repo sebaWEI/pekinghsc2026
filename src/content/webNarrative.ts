@@ -1,5 +1,4 @@
 import {
-  placeholderGalleryReadout,
   placeholderLensMetrics,
   placeholderLensStructure,
 } from './placeholderAssets';
