@@ -1,0 +1,24 @@
+stages:
+  - build
+
+default:
+  image: node:20
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules/
+
+build_wiki:
+  stage: build
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    when: always
+    expire_in: 1 week
+    paths:
+      - dist/
+  rules:
+    - if: $CI_COMMIT_BRANCH

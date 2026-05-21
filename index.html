@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;700;800&family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PKU iGEM 2026 — Reprogramming Translation</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/compliance-footer.css" />
+  </head>
+  <body>
+    <!-- Hero 3D canvas -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- Hero title + status: stacked on one anchor so the title and in-progress hint do not overlap -->
+    <div class="hero-intro-stack">
+      <div id="overlay">
+        <h1>SINEB2–ChromDel</h1>
+        <p>PekingHSC 2026</p>
+      </div>
+      <div id="click-hint">
+        <span class="hint-ring"></span>
+        <span class="hint-text" id="hint-text">RNA synthesis in progress...</span>
+      </div>
+    </div>
+
+    <!-- Main showcase: tagline near RNA; hides with story when entering follow scroll -->
+    <div id="hero-showcase-tagline" class="hero-showcase-tagline" aria-hidden="true">
+      <h2 class="hero-showcase-tagline__title">Reprogramming Translation</h2>
+      <p class="hero-showcase-tagline__lead">
+        Overcoming payload limits to cure chromosomal microdeletions via AI-native SINEUPs
+      </p>
+    </div>
+
+    <!-- Overview: subtle cue to scroll into story (below hero) -->
+    <p id="scroll-explore-hint" class="scroll-explore-hint" aria-hidden="true">
+      <span class="scroll-explore-hint__chev" aria-hidden="true"></span>
+      <span class="scroll-explore-hint__text">Scroll to explore</span>
+    </p>
+
+    <!-- Full story: all sections scroll naturally -->
+    <main class="story" id="story">
+      <!-- Sections populated by webNarrativeMount.ts -->
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+    <script defer src="/compliance-footer.js"></script>
+  </body>
+</html>

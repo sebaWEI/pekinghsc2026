@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640">
+  <rect width="960" height="640" fill="#060d16"/>
+  <path d="M480 120 L620 240 L560 420 L400 420 L340 240 Z" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="480" cy="280" r="48" fill="none" stroke="#7dd3fc" stroke-width="2"/>
+  <text x="480" y="560" text-anchor="middle" fill="#e0f2fe" font-family="system-ui,sans-serif" font-size="30" font-weight="600">Act I - SINEB2 Overview</text>
+  <text x="480" y="600" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="16">placeholder-scene-overview.svg</text>
+</svg>

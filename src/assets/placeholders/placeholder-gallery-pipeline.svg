@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#12081a"/>
+  <rect x="60" y="120" width="780" height="360" rx="18" fill="none" stroke="#f9a8d4" stroke-width="2" stroke-dasharray="12 8"/>
+  <text x="450" y="290" text-anchor="middle" fill="#fbcfe8" font-family="system-ui,sans-serif" font-size="28" font-weight="600">Gallery - Pipeline</text>
+  <text x="450" y="330" text-anchor="middle" fill="#9ca3af" font-family="system-ui,sans-serif" font-size="16">placeholder-gallery-pipeline.svg</text>
+</svg>

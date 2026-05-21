@@ -1,0 +1,59 @@
+:root {
+  --page-bg: #061223;
+  --page-panel: rgba(10, 30, 56, 0.88);
+  --page-border: rgba(150, 214, 255, 0.28);
+  --page-text: rgba(224, 242, 255, 0.96);
+  --page-muted: rgba(178, 210, 236, 0.86);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: radial-gradient(circle at 50% 18%, #12335e 0%, var(--page-bg) 60%, #040a14 100%);
+  color: var(--page-text);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+main {
+  width: min(1040px, calc(100vw - 28px));
+  margin: 30px auto 84px;
+  padding: 24px clamp(14px, 2.5vw, 32px) 28px;
+  border: 1px solid var(--page-border);
+  border-radius: 16px;
+  background: var(--page-panel);
+  backdrop-filter: blur(6px);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+  letter-spacing: 0.02em;
+}
+
+.standard-meta {
+  margin-top: 12px;
+  color: var(--page-muted);
+  font-size: 0.96rem;
+}
+
+.standard-section {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px dashed rgba(149, 209, 255, 0.28);
+  border-radius: 10px;
+  background: rgba(8, 24, 44, 0.44);
+}
+
+.standard-section h2 {
+  margin: 0 0 8px;
+  font-size: 1.02rem;
+}
+
+a {
+  color: rgba(186, 228, 255, 0.98);
+}

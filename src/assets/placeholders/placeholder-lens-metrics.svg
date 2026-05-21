@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#052e16"/>
+      <stop offset="100%" style="stop-color:#064e3b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <polyline fill="none" stroke="#34d399" stroke-width="3" points="80,620 200,480 360,520 520,320 700,400 880,220 1080,280"/>
+  <text x="600" y="120" text-anchor="middle" fill="#6ee7b7" font-family="system-ui,sans-serif" font-size="36" font-weight="600">Placeholder - Binding metrics</text>
+  <text x="600" y="720" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="20">Replace with plot (SVG / PNG)</text>
+</svg>

@@ -1,0 +1,43 @@
+.igem-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+body.show-compliance-footer .igem-footer {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.igem-footer__inner {
+  pointer-events: auto;
+  width: min(1180px, calc(100vw - 24px));
+  margin: 0 auto 10px;
+  padding: 8px 12px;
+  border: 1px solid rgba(160, 214, 255, 0.34);
+  border-radius: 10px;
+  background: rgba(8, 24, 44, 0.84);
+  backdrop-filter: blur(6px);
+  color: rgba(218, 238, 255, 0.92);
+  font: 500 12px/1.45 "Segoe UI", system-ui, -apple-system, sans-serif;
+  text-align: center;
+}
+
+.igem-footer__inner a {
+  color: rgba(184, 226, 255, 0.98);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.igem-footer__inner a:hover {
+  color: rgba(224, 244, 255, 1);
+}
