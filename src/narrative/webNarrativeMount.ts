@@ -237,15 +237,15 @@ function mountMechanismSection(parent: HTMLElement): { destroy: () => void } {
 
   const mrnaHost = el('div', 'mechanism__mrna-host', stage);
   const mrnaRotor = el('div', 'mechanism__mrna-rotor', mrnaHost);
-  mrnaRotor.appendChild(img('mechanism__mrna', '/images/mRNA.svg', '', true));
+  mrnaRotor.appendChild(img('mechanism__mrna', './images/mRNA.svg', '', true));
   el('span', 'mechanism__mrna-center', mrnaRotor).setAttribute('aria-hidden', 'true');
   el('span', 'mechanism__mrna-dock', mrnaRotor).setAttribute('aria-hidden', 'true');
 
   const mrnaSineHost = el('div', 'mechanism__mrna-sine-host', stage);
-  mrnaSineHost.appendChild(img('mechanism__mrna-sine', '/images/mRNA_sine2.svg', '', true));
+  mrnaSineHost.appendChild(img('mechanism__mrna-sine', './images/mRNA_sine2.svg', '', true));
   el('span', 'mechanism__sine-tip', mrnaSineHost).setAttribute('aria-hidden', 'true');
-  stage.appendChild(img('mechanism__sub60', '/images/60s.svg', '60S ribosomal subunit'));
-  stage.appendChild(img('mechanism__sub40', '/images/40s.svg', '40S ribosomal subunit'));
+  stage.appendChild(img('mechanism__sub60', './images/60s.svg', '60S ribosomal subunit'));
+  stage.appendChild(img('mechanism__sub40', './images/40s.svg', '40S ribosomal subunit'));
 
   const scroll = mountMechanismScroll(sec);
   return { destroy: () => scroll.destroy() };

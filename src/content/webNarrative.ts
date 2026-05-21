@@ -100,19 +100,19 @@ export interface WebNarrativeContent {
 /** Temporary placeholders — reuse Triple Dead End assets until synthesis art is ready. */
 const SYNTH_PLACEHOLDER_VISUALS = [
   {
-    imageUrl: '/images/crispr.png',
+    imageUrl: './images/crispr.png',
     imageAlt: 'CRISPR — molecular scissors and DNA target',
-    sceneBgUrl: '/images/crispr_background.png',
+    sceneBgUrl: './images/crispr_background.png',
   },
   {
-    imageUrl: '/images/aav.png',
+    imageUrl: './images/aav.png',
     imageAlt: 'Adeno-associated virus capsid — delivery payload limit',
-    sceneBgUrl: '/images/aav_background.png',
+    sceneBgUrl: './images/aav_background.png',
   },
   {
-    imageUrl: '/images/therapy.png',
+    imageUrl: './images/therapy.png',
     imageAlt: 'Schematic — therapeutic readouts',
-    sceneBgUrl: '/images/therapy_background.jpg',
+    sceneBgUrl: './images/therapy_background.jpg',
   },
 ] as const satisfies readonly WebSynthesisMedia[];
 
@@ -134,27 +134,27 @@ export const WEB_NARRATIVE: WebNarrativeContent = {
     cards: [
       {
         tag: 'No template',
-        imageUrl: '/images/crispr.png',
+        imageUrl: './images/crispr.png',
         imageAlt: 'CRISPR — molecular scissors and DNA target',
-        hoverBgUrl: '/images/crispr_background.png',
+        hoverBgUrl: './images/crispr_background.png',
         title: "CRISPR's Blind Spot",
         body:
           'Gene editing requires an existing template. Microdeletions physically erase entire multi-gene segments from the chromosome. You cannot edit or repair what has completely vanished.',
       },
       {
         tag: 'Payload wall',
-        imageUrl: '/images/aav.png',
+        imageUrl: './images/aav.png',
         imageAlt: 'Adeno-associated virus capsid — delivery payload limit',
-        hoverBgUrl: '/images/aav_background.png',
+        hoverBgUrl: './images/aav_background.png',
         title: 'The Payload Wall',
         body:
           'A single microdeletion wipes out multiple critical genes. The gold-standard AAV delivery vehicle has a strict 4.7kb payload limit. Packing all the missing heavy cDNAs into one vector is mathematically and physically impossible.',
       },
       {
         tag: 'Symptom trap',
-        imageUrl: '/images/therapy.png',
+        imageUrl: './images/therapy.png',
         imageAlt: 'Schematic — readouts',
-        hoverBgUrl: '/images/therapy_background.jpg',
+        hoverBgUrl: './images/therapy_background.jpg',
         title: 'The Symptom Trap',
         body:
           'Zero foundational cures exist. Current pharmaceutical interventions merely manage downstream developmental and neurological symptoms, leaving the underlying multi-gene deficit completely untouched.',
@@ -165,7 +165,7 @@ export const WEB_NARRATIVE: WebNarrativeContent = {
     {
       subtitle: 'The Microdeletion Crisis',
       body: 'Chromosomal microdeletions like Wolf-Hirschhorn Syndrome (~1:50,000 births) drive devastating congenital defects and high mortality. Crucially, WHS isn\'t a single-gene flaw—it\'s the collective erasure of an entire gene network. This multi-gene collapse causes lifelong neurological failure, leaving modern medicine at an absolute dead end.',
-      imageUrl: '/images/chrom.svg',
+      imageUrl: './images/chrom.svg',
       imageAlt: 'Chromosome — chromosomal microdeletion',
     },
     {
