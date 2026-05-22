@@ -1171,6 +1171,12 @@ loadRnaModel(rnaModelUrl, 8.0)
     });
     hotspotLayer.setVisible(false);
     buildModelParticleTargets(loaded.model);
+    // 🌟 Start particle birth animation only after model is fully loaded
+    if (phase === 'loading') {
+      phase = 'assembly';
+      phaseElapsed = 0;
+      if (hintTextEl) hintTextEl.textContent = 'RNA synthesis in progress...';
+    }
     // Mount narrative sections
     const storyEl = document.getElementById('story')!;
     narrative = mountNarrative(WEB_NARRATIVE, storyEl, {
@@ -1201,6 +1207,10 @@ loadRnaModel(rnaModelUrl, 8.0)
     scene.add(strand1.group);
     scene.add(strand2.group);
     buildProceduralParticleTargets();
+    if (phase === 'loading') {
+      phase = 'assembly';
+      phaseElapsed = 0;
+    }
   });
 
 // 常驻背景闪烁粒子（所有阶段持续可见）
@@ -1683,9 +1693,9 @@ const FOCUS_LAYOUT_RNA_X = 0.58;
 const FINAL_CAMERA_POS = new THREE.Vector3(7.15, 2.62, 10.35);
 const FINAL_LOOK_AT = new THREE.Vector3(-0.2, 0.2, 0);
 
-type Phase = 'assembly' | 'ready' | 'transition' | 'follow';
-type ExperienceState = 'assembly' | 'ready' | 'transition' | 'overview' | 'story' | 'focus';
-let phase: Phase = 'assembly';
+type Phase = 'loading' | 'assembly' | 'ready' | 'transition' | 'follow';
+type ExperienceState = 'loading' | 'assembly' | 'ready' | 'transition' | 'overview' | 'story' | 'focus';
+let phase: Phase = 'loading';
 let phaseElapsed = 0;
 let readyInteractive = false;
 
@@ -1693,6 +1703,7 @@ function resolveExperienceState(
   phaseNow: Phase,
   mode: InteractionState['mode'],
 ): ExperienceState {
+  if (phaseNow === 'loading') return 'loading';
   if (phaseNow === 'assembly') return 'assembly';
   if (phaseNow === 'ready') return 'ready';
   if (phaseNow === 'transition') return 'transition';
@@ -1847,6 +1858,9 @@ function applyStoredFollowHeroState(): void {
 }
 
 updateHintState('locked');
+if (phase === 'loading' && hintTextEl) {
+  hintTextEl.textContent = 'Loading 3D model...';
+}
 updateOverlayState('assembling');
 setRnaOpacity(0);
 applyStoredFollowHeroState();
@@ -1944,6 +1958,7 @@ function animate(): void {
     }
   }
   const orbitSpeed =
+    phase === 'loading' ? 0.0 :
     phase === 'assembly' ? 0.72 :
     phase === 'ready' ? 0.76 :
     0.0;

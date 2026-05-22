@@ -1,0 +1,313 @@
+@import "tailwindcss";
+
+/* ── iGEM 2026 Wiki — Design Tokens ── */
+
+@theme {
+  /* Font families */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --font-display: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-wordmark: 'Orbitron', 'Outfit', system-ui, sans-serif;
+
+  /* Colors — Bioluminescent Lab palette */
+  --color-void-deep: #070b14;
+  --color-void: #0b1020;
+  --color-void-raised: #101a2d;
+
+  --color-story-black: #0a0a0a;
+  --color-story-white: #ffffff;
+  --color-story-blue: #26588a;
+  --color-story-accent: #40d4ff;
+
+  --color-chrome: rgba(13, 22, 40, 0.94);
+
+  --color-text-main: rgba(232, 236, 245, 0.96);
+  --color-text-soft: rgba(155, 175, 205, 0.82);
+  --color-text-muted: rgba(200, 220, 240, 0.72);
+  --color-text-ghost: rgba(140, 200, 240, 0.5);
+
+  --color-btn-fill: #141f36;
+  --color-btn-fill-hover: #1b2a45;
+
+  --color-glass-bg: rgba(255, 255, 255, 0.025);
+  --color-glass-bg-hover: rgba(255, 255, 255, 0.04);
+  --color-glass-border: rgba(255, 255, 255, 0.06);
+  --color-glass-border-hover: rgba(255, 255, 255, 0.1);
+
+  /* Border radius */
+  --radius-card: 12px;
+  --radius-nav: 14px;
+
+  /* Z-index scale */
+  --z-canvas: 1;
+  --z-vignette: 2;
+  --z-overlay: 4;
+  --z-showcase: 5;
+  --z-brand: 7;
+  --z-glyph: 10;
+  --z-nav: 100;
+  --z-intro-card: 110;
+}
+
+/* ── CSS custom properties (shared) ── */
+
+:root {
+  /* Layout tokens */
+  --story-pad-x: clamp(24px, 6vw, 120px);
+  --story-pad-y: clamp(80px, 10vh, 140px);
+  --story-content-max: 1200px;
+  --story-content-width: min(var(--story-content-max), 88%);
+
+  /* Typography tokens */
+  --story-label-size: clamp(0.75rem, 0.55vw + 0.65rem, 1rem);
+  --story-heading-size: clamp(1.85rem, 4.5vw + 0.5rem, 6.75rem);
+  --story-body-size: clamp(0.92rem, 0.5vw + 0.84rem, 1.25rem);
+
+  /* Lens tokens */
+  --story-lens-media-h: min(46vh, 520px);
+  --story-lens-text-pad-y: clamp(40px, 8vh, 80px);
+  --story-lens-text-pad-x: clamp(24px, 5vw, 60px);
+
+  /* Bento tokens */
+  --story-bento-head-inset: clamp(16px, 5vw, 88px);
+  --story-bento-subtitle-size: clamp(0.78rem, 1.25vw + 0.42rem, 1.75rem);
+  --story-bento-panel-min-h: clamp(390px, 48vh, 630px);
+  --story-bento-visual-min-h: clamp(185px, 26vh, 300px);
+  --story-bento-img-max-h: clamp(220px, 30vh, 335px);
+  --story-bento-tag-size: clamp(1.05rem, 2.05vw + 0.18rem, 1.75rem);
+  --story-bento-roman-size: clamp(1.42rem, 3vw, 2.22rem);
+}
+
+/* ── Base ── */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html.hero-scroll-lock,
+  html.hero-scroll-lock body {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: linear-gradient(180deg, #070b14 0%, #0b1020 100%);
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+}
+
+/* ── Components (layout / typography / color — Tailwind powered) ── */
+
+@layer components {
+
+  /* ---- Story sections ---- */
+
+  .story-section {
+    @apply relative flex items-center;
+    min-height: 100svh;
+    padding: var(--story-pad-y) var(--story-pad-x);
+    overflow: clip;
+  }
+
+  .story-inner {
+    @apply mx-auto max-w-full min-w-0;
+    width: var(--story-content-width);
+  }
+
+  .story-hero-spacer {
+    @apply relative w-full shrink-0 pointer-events-none;
+    z-index: 0;
+    min-height: 100svh;
+    background: linear-gradient(180deg, #070b14 0%, #0b1020 100%);
+  }
+
+  /* ---- Typography ---- */
+
+  .section-label {
+    @apply font-serif font-normal uppercase;
+    font-size: var(--story-label-size);
+    letter-spacing: 0.06em;
+    color: var(--color-text-ghost);
+    margin-bottom: clamp(12px, 2vh, 24px);
+  }
+
+  .section-heading {
+    @apply font-serif font-normal text-balance;
+    font-size: var(--story-heading-size);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    color: rgba(245, 252, 255, 0.98);
+    margin-bottom: clamp(10px, 1.8vh, 22px);
+    max-width: min(32ch, 100%);
+    overflow-wrap: anywhere;
+  }
+
+  .section-heading.opening-bento__title {
+    @apply text-left ml-0 mr-auto;
+    max-width: min(100%, 40ch);
+  }
+
+  .section-body {
+    @apply leading-relaxed;
+    max-width: min(42rem, 100%);
+    font-size: var(--story-body-size);
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  /* ---- Gallery ---- */
+
+  .gallery-grid {
+    @apply grid grid-cols-1 lg:grid-cols-3;
+    gap: clamp(16px, 2vw, 24px);
+    margin-top: clamp(32px, 5vh, 48px);
+  }
+
+  .gallery-card {
+    @apply overflow-hidden;
+    border-radius: 14px;
+    border: 1px solid var(--color-glass-border);
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition:
+      transform 400ms cubic-bezier(.22, 1, .36, 1),
+      background 300ms ease,
+      border-color 300ms ease;
+  }
+
+  .gallery-card:hover {
+    transform: translateY(-4px);
+    background: var(--color-glass-bg-hover);
+    border-color: var(--color-glass-border-hover);
+  }
+
+  .gallery-card__media {
+    @apply overflow-hidden;
+    aspect-ratio: 4 / 3;
+    background: rgba(6, 14, 28, 0.6);
+  }
+
+  .gallery-card__media img {
+    @apply block size-full object-cover;
+    transition: transform 600ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .gallery-card:hover .gallery-card__media img {
+    transform: scale(1.04);
+  }
+
+  .gallery-card__title {
+    @apply font-serif font-normal;
+    padding: clamp(12px, 2vh, 16px) clamp(14px, 3vw, 18px) 4px;
+    font-size: clamp(0.95rem, 2.2vw + 0.4rem, 1.1rem);
+    color: rgba(245, 252, 255, 0.95);
+  }
+
+  .gallery-card__body {
+    @apply leading-relaxed;
+    padding: 0 clamp(14px, 3vw, 18px) clamp(14px, 2.5vh, 18px);
+    font-size: clamp(0.82rem, 2vw + 0.35rem, 0.9rem);
+    line-height: 1.6;
+    color: rgba(180, 210, 235, 0.7);
+  }
+
+  /* ---- Interlude ---- */
+
+  .story-section--interlude {
+    @apply justify-center text-center;
+  }
+
+  .interlude-inner {
+    @apply mx-auto;
+    max-width: min(52rem, 90vw);
+  }
+
+  .interlude-heading {
+    @apply font-serif font-normal text-balance mx-auto;
+    font-size: var(--story-heading-size);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    color: rgba(252, 250, 242, 0.98);
+    max-width: min(18ch, 100%);
+    overflow-wrap: anywhere;
+  }
+
+  .interlude-body {
+    @apply mx-auto leading-relaxed;
+    margin-top: clamp(16px, 2.5vh, 32px);
+    max-width: min(48ch, 100%);
+    font-size: var(--story-body-size);
+    line-height: 1.85;
+    color: rgba(230, 225, 210, 0.8);
+  }
+
+  /* ---- Footer ---- */
+
+  .story-section--footer {
+    @apply justify-center text-center;
+    min-height: min(100svh, 700px);
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .footer-inner {
+    @apply mx-auto;
+    max-width: min(600px, 90vw);
+  }
+
+  .footer-tagline {
+    @apply font-semibold;
+    font-size: clamp(0.95rem, 2.2vw + 0.45rem, 1.4rem);
+    color: rgba(245, 252, 255, 0.95);
+  }
+
+  .footer-link {
+    @apply inline-block no-underline;
+    margin-top: 14px;
+    color: rgba(130, 200, 240, 0.75);
+    border-bottom: 1px solid rgba(130, 200, 240, 0.2);
+    transition: border-color 200ms ease, color 200ms ease;
+  }
+
+  .footer-link:hover {
+    color: rgba(160, 220, 255, 0.9);
+    border-bottom-color: rgba(160, 220, 255, 0.5);
+  }
+
+  .footer-note {
+    @apply mt-3;
+    font-size: clamp(0.78rem, 1.8vw + 0.35rem, 0.88rem);
+    color: rgba(160, 190, 215, 0.55);
+  }
+
+  /* ---- Reveal animation (IntersectionObserver driven) ---- */
+
+  .story-section .reveal {
+    @apply opacity-0 translate-y-10;
+    transition:
+      opacity 800ms cubic-bezier(.22, 1, .36, 1),
+      transform 800ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .story-section .reveal.is-visible {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .story-section .reveal--delay {
+    transition-delay: 150ms;
+  }
+}
