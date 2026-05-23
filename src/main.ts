@@ -9,8 +9,6 @@ import { createPartRaycastController } from './interaction/raycast';
 import { createHotspotLayer } from './interaction/hotspots';
 import { computeFocusCameraTarget } from './camera/cameraController';
 import { createIntroCard } from './ui/introCard';
-import { WEB_NARRATIVE } from './content/webNarrative';
-import { mountNarrative } from './narrative/webNarrativeMount';
 import {
   createNarrativeHeroRnaView,
   type NarrativeHeroRnaView,
@@ -662,7 +660,6 @@ function createHeroIslandWordmark(parent: HTMLElement) {
 }
 const heroIslandWordmark = createHeroIslandWordmark(detailNav.getIslandBrandSlot());
 
-export let narrative: ReturnType<typeof mountNarrative> | null = null;
 let narrativeHeroRnaView: NarrativeHeroRnaView | null = null;
 let narrativeHeroSineupStrip: NarrativeHeroSineupStrip | null = null;
 const ringDynamicAxis = new THREE.Vector3();
@@ -1175,30 +1172,34 @@ loadRnaModel(rnaModelUrl, 8.0)
     if (phase === 'loading') {
       phase = 'assembly';
       phaseElapsed = 0;
-      if (hintTextEl) hintTextEl.textContent = 'RNA synthesis in progress...';
+      if (hintTextEl) hintTextEl.textContent = 'RNA strands coalescing…';
     }
-    // Mount narrative sections
-    const storyEl = document.getElementById('story')!;
-    narrative = mountNarrative(WEB_NARRATIVE, storyEl, {
-      beforeDestroy: () => {
-        narrativeHeroRnaView?.dispose();
-        narrativeHeroRnaView = null;
-        narrativeHeroSineupStrip?.dispose();
-        narrativeHeroSineupStrip = null;
-      },
-    });
-    const insetHost = storyEl.querySelector<HTMLElement>('.hero-glyph__three-host');
-    const sineupHost = storyEl.querySelector<HTMLElement>('.hero-sineup-host');
-    if (insetHost) {
-      narrativeHeroRnaView?.dispose();
-      narrativeHeroRnaView = createNarrativeHeroRnaView(insetHost, scene, {
-        getModelForBounds: () => loaded.model,
-      });
+    // Wire up 3D RNA views into React-rendered narrative DOM.
+    // React 19 concurrent rendering may not have flushed DOM when this
+    // async callback fires — retry via rAF until elements are found.
+    function wireRnaViews(attempts: number): void {
+      const insetHost = document.querySelector<HTMLElement>('.hero-glyph__three-host');
+      const sineupHost = document.querySelector<HTMLElement>('.hero-sineup-host');
+
+      if (insetHost || sineupHost) {
+        if (insetHost) {
+          narrativeHeroRnaView?.dispose();
+          narrativeHeroRnaView = createNarrativeHeroRnaView(insetHost, scene, {
+            getModelForBounds: () => loaded.model,
+          });
+        }
+        if (sineupHost) {
+          narrativeHeroSineupStrip?.dispose();
+          narrativeHeroSineupStrip = createNarrativeHeroSineupStrip(sineupHost);
+        }
+        return;
+      }
+
+      if (attempts > 0) {
+        requestAnimationFrame(() => wireRnaViews(attempts - 1));
+      }
     }
-    if (sineupHost) {
-      narrativeHeroSineupStrip?.dispose();
-      narrativeHeroSineupStrip = createNarrativeHeroSineupStrip(sineupHost);
-    }
+    wireRnaViews(10);
     const finalBox = new THREE.Box3().setFromObject(loaded.model);
     const size = finalBox.getSize(new THREE.Vector3());
     assemblyCenter.set(0, Math.max(0.15, Math.min(0.55, size.y * 0.03)), 0);
@@ -1785,12 +1786,12 @@ function updateHintState(next: 'locked' | 'ready' | 'hide'): void {
   if (next === 'locked') {
     hintEl.classList.add('locked');
     hintEl.style.opacity = '1';
-    hintTextEl.textContent = 'RNA synthesis in progress...';
+    hintTextEl.textContent = 'Assembling the RNA machinery…';
     if (hintRingEl) hintRingEl.style.opacity = '0';
   } else if (next === 'ready') {
     hintEl.classList.add('ready');
     hintEl.style.opacity = '1';
-    hintTextEl.textContent = "Dive into SINEB2's world";
+    hintTextEl.textContent = 'Explore the SINEB2 universe';
     if (hintRingEl) hintRingEl.style.opacity = '';
   } else {
     hintEl.style.opacity = '0';
@@ -1859,7 +1860,7 @@ function applyStoredFollowHeroState(): void {
 
 updateHintState('locked');
 if (phase === 'loading' && hintTextEl) {
-  hintTextEl.textContent = 'Loading 3D model...';
+  hintTextEl.textContent = 'Loading the RNA blueprint…';
 }
 updateOverlayState('assembling');
 setRnaOpacity(0);
@@ -2418,7 +2419,6 @@ window.addEventListener('resize', () => {
   depthTarget.setSize(w * newDpr, h * newDpr);
   renderer.setSize(w, h);
   detailNav.relayout();
-  if (narrative) narrative.refresh();
 });
 
 animate();
