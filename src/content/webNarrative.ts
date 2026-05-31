@@ -193,7 +193,6 @@ export const WEB_NARRATIVE: WebNarrativeContent = {
     origin: {
       title: 'Design fork',
       body: 'From chromosomal microdeletion context, two parallel design rails define the SINEUP element.',
-      media: synthPlaceholderMedia(0),
     },
     bindingPath: {
       label: 'Binding domain',

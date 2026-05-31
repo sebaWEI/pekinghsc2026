@@ -1,0 +1,276 @@
+/* ── Loading Screen ──
+ * AAA-game-style loading overlay.
+ * Use via LoadingScreen.ts controller on any page.
+ * ──────────────────────────── */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: var(--loading-bg, #05080f);
+  opacity: 1;
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.25, 1),
+    visibility 0.8s cubic-bezier(0.2, 0.8, 0.25, 1);
+  visibility: visible;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.loading-screen--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ── Canvas background (particles) ── */
+.loading-screen__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* ── Cinematic letterbox bars ── */
+.loading-screen__bar-top,
+.loading-screen__bar-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: 0;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(20, 50, 100, 0.06) 15%,
+    rgba(20, 50, 100, 0.06) 85%,
+    transparent 100%
+  );
+  border-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(80, 150, 230, 0.08) 20%,
+    rgba(80, 150, 230, 0.12) 50%,
+    rgba(80, 150, 230, 0.08) 80%,
+    transparent 100%
+  ) 1;
+  transition: height 0.6s ease-out;
+}
+
+.loading-screen__bar-top {
+  top: 0;
+  border-bottom: 1px solid rgba(80, 150, 230, 0.06);
+}
+
+.loading-screen__bar-bottom {
+  bottom: 0;
+  border-top: 1px solid rgba(80, 150, 230, 0.06);
+}
+
+.loading-screen--hidden .loading-screen__bar-top,
+.loading-screen--hidden .loading-screen__bar-bottom {
+  height: 0 !important;
+}
+
+/* ── Content container ── */
+.loading-screen__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 0;
+  padding: 40px 20px;
+}
+
+/* ── Central ring system ── */
+.loading-screen__ring-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 36px;
+}
+
+.loading-screen__ring-glow {
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(80, 160, 240, 0.10) 0%,
+    rgba(80, 160, 240, 0.04) 40%,
+    transparent 70%
+  );
+  animation: loading-glow-pulse 2.8s ease-in-out infinite alternate;
+}
+
+.loading-screen__ring-outer {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(80, 150, 230, 0.08);
+  border-radius: 50%;
+}
+
+/* ── Triple-ring spinner ── */
+.loading-screen__ring-spinner {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: rgba(100, 175, 255, 0.7);
+  border-right-color: rgba(70, 140, 220, 0.3);
+  animation: loading-ring-spin 1.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  will-change: transform;
+}
+
+.loading-screen__ring-spinner--inner {
+  inset: 10px;
+  border-width: 1.5px;
+  border-top-color: rgba(160, 210, 255, 0.5);
+  border-left-color: rgba(100, 170, 240, 0.2);
+  animation-duration: 2.2s;
+  animation-direction: reverse;
+}
+
+.loading-screen__ring-spinner--pulse {
+  inset: 22px;
+  border-width: 1px;
+  border-top-color: rgba(200, 230, 255, 0.35);
+  animation-duration: 3.0s;
+}
+
+@keyframes loading-ring-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes loading-glow-pulse {
+  0%   { opacity: 0.3; transform: scale(0.90); }
+  100% { opacity: 1;   transform: scale(1.10); }
+}
+
+/* ── Brand section ── */
+.loading-screen__brand {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.loading-screen__title {
+  font-family: 'Orbitron', 'Outfit', system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(200, 225, 250, 0.8);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.loading-screen__subtitle {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(130, 170, 215, 0.4);
+  margin: 4px 0 0;
+}
+
+/* ── Progress bar ── */
+.loading-screen__progress-track {
+  width: 200px;
+  height: 2px;
+  background: rgba(60, 120, 200, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.loading-screen__progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(70, 150, 230, 0.3),
+    rgba(120, 190, 255, 0.7) 40%,
+    rgba(160, 215, 255, 0.9) 70%,
+    rgba(100, 180, 255, 0.5)
+  );
+  background-size: 200% 100%;
+  transition: width 0.3s ease-out;
+  animation: loading-bar-shimmer 2.2s ease-in-out infinite;
+}
+
+@keyframes loading-bar-shimmer {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* ── Status / tip text ── */
+.loading-screen__status {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: rgba(140, 180, 225, 0.5);
+  text-align: center;
+  max-width: 300px;
+  line-height: 1.5;
+  min-height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease;
+}
+
+.loading-screen__status--fading {
+  opacity: 0;
+}
+
+/* ── Bottom metadata ── */
+.loading-screen__meta {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  text-align: center;
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(100, 140, 190, 0.2);
+}
+
+/* ── Corpsel / "vignette" overlay for depth ── */
+.loading-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+}
+
+/* ── Noise texture overlay ── */
+.loading-screen__noise {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}

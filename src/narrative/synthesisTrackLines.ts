@@ -65,24 +65,29 @@ function buildBranchPath(
   mergeY: number,
   scale: number,
 ): string {
-  const dx = Math.abs(railX - cx);
   const forkSpan = Math.max(yForkBottom - yForkTop, 1);
   const leadCap = 52 * scale;
-  const leadIn = Math.min(leadCap, Math.max(18, (yForkTop - yBranch) * 0.72));
   const leadOut = Math.min(leadCap, Math.max(18, forkSpan * 0.14, (mergeY - yForkBottom) * 0.45));
-  const dir = railX < cx ? -1 : 1;
+
+  // ── Lower arc: rail → merge hub ──
+  const lowerStartY = yForkBottom - leadOut * 0.35;
+  const lowerCp1y = yForkBottom + leadOut * 0.10;
+  const lowerCp2x = railX + (mergeX - railX) * 0.35;
+  const lowerCp2y = mergeY - leadOut * 0.15;
+
+  // ── Upper arc: exact Y-mirror of lower arc, shifted to connect at yBranch ──
+  const midY = (yBranch + lowerStartY) / 2;
+  const flipY = (y: number) => 2 * midY - y;
+  const shift = yBranch - flipY(mergeY);
 
   return [
     `M ${cx} ${yBranch}`,
-    `C ${cx} ${yBranch + leadIn * 0.38}`,
-    `${cx + dir * dx * 0.18} ${yBranch + leadIn * 0.72}`,
-    `${cx + dir * dx * 0.58} ${yForkTop - leadIn * 0.1}`,
-    `C ${cx + dir * dx * 0.9} ${yForkTop + leadIn * 0.06}`,
-    `${railX} ${yForkTop + leadIn * 0.16}`,
-    `${railX} ${yForkTop + leadIn * 0.28}`,
-    `L ${railX} ${yForkBottom - leadOut * 0.28}`,
-    `C ${railX} ${yForkBottom + leadOut * 0.06}`,
-    `${railX + (mergeX - railX) * 0.38} ${mergeY - leadOut * 0.2}`,
+    `C ${lowerCp2x} ${flipY(lowerCp2y) + shift}`,
+    `${railX} ${flipY(lowerCp1y) + shift}`,
+    `${railX} ${flipY(lowerStartY) + shift}`,
+    `L ${railX} ${lowerStartY}`,
+    `C ${railX} ${lowerCp1y}`,
+    `${lowerCp2x} ${lowerCp2y}`,
     `${mergeX} ${mergeY}`,
   ].join(' ');
 }
@@ -201,7 +206,7 @@ export function mountSynthesisTrackLines(track: HTMLElement): SynthesisTrackLine
     const tailRect = tailEl.getBoundingClientRect();
     const tailEnd = tailRect.bottom - trackRect.top;
 
-    const stemLen = Math.min(36 * scale, Math.max(10, (forkTop - origin.bottom) * 0.32));
+    const stemLen = Math.min(160 * scale, Math.max(20, (forkTop - origin.bottom) * 0.85));
     const yBranch = origin.bottom + stemLen;
 
     const stemD = `M ${cx} ${origin.bottom} L ${cx} ${yBranch}`;
