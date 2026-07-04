@@ -1,0 +1,128 @@
+/*
+ * Web fonts — loaded from iGEM CDN (static.igem.wiki), not Google Fonts.
+ *
+ * Upload the .woff2 files first:
+ *   npm run prepare:fonts
+ * then upload everything under uploads/fonts/ via iGEM Uploads to:
+ *   static.igem.wiki/teams/2026/pekinghsc/assets/fonts/
+ *
+ * Keep this base URL in sync with VITE_IGEM_STATIC_BASE in .env.example.
+ * Licenses: SIL OFL 1.1 — see docs/asset-attribution.md
+ */
+
+@font-face {
+  font-family: 'DM Serif Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/dm-serif-display-latin-400-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Serif Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/dm-serif-display-latin-400-italic.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/inter-latin-400-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/inter-latin-500-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/inter-latin-600-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/inter-latin-700-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/orbitron-latin-600-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/orbitron-latin-700-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/orbitron-latin-800-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/outfit-latin-400-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/outfit-latin-500-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/outfit-latin-600-normal.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://static.igem.wiki/teams/2026/pekinghsc/assets/fonts/outfit-latin-700-normal.woff2')
+    format('woff2');
+}

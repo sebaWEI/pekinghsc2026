@@ -7,7 +7,6 @@ import { MechanismSection } from './MechanismSection';
 import { SynthesisSection } from './SynthesisSection';
 import { GallerySection } from './GallerySection';
 import { InterludeSection } from './InterludeSection';
-import { FooterSection } from './FooterSection';
 
 interface NarrativeProps {
   content: WebNarrativeContent;
@@ -148,12 +147,6 @@ export function Narrative({ content, onHeroNarrativeIntersect }: NarrativeProps)
         body={content.interlude.body}
       />
 
-      {/* Footer */}
-      <FooterSection
-        tagline={content.footer.tagline}
-        email={content.footer.email}
-        lab={content.footer.lab}
-      />
     </main>
   );
 }

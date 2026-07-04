@@ -1,4 +1,4 @@
-/** Empty string = same-origin `public/` (build → `dist/` root). */
+/** CDN base for static assets on static.igem.wiki (see .env.example). */
 const DEFAULT_STATIC_BASE = '';
 const DEFAULT_VIDEO_BASE = '';
 
@@ -11,7 +11,7 @@ function normalize(base: string): string {
   return base.endsWith('/') ? base.slice(0, -1) : base;
 }
 
-/** Same-origin URL for files under `public/` (respects Vite `base`, including `./`). */
+/** Same-origin fallback when CDN is not configured (local dev without .env). */
 function joinWithBase(pathFromRoot: string): string {
   const p = pathFromRoot.startsWith('/') ? pathFromRoot.slice(1) : pathFromRoot;
   const raw = (import.meta.env.BASE_URL || '/').trim() || '/';
@@ -25,25 +25,14 @@ function joinWithBase(pathFromRoot: string): string {
   return `${prefix}${p}`.replace(/\/{3,}/g, '/');
 }
 
-/** Repo placeholders — keep on same origin so they work even when `.env` points CDN at unfinished uploads. */
-function isBundledPlaceholderPath(path: string): boolean {
-  return path.includes('placeholder-');
-}
-
 /**
- * Static images: `public/` (or CDN when configured).
- *
- * - **Dev**: always same-origin (`public/`), so local placeholders work even with `VITE_IGEM_STATIC_BASE` set.
- * - **Production**: CDN root is used only for non-placeholder paths; `placeholder-*` stays same-origin
- *   (must exist under `public/images` so Vite copies them to `dist/images`).
+ * Static asset URL — images, models, fonts on iGEM CDN when `VITE_IGEM_STATIC_BASE` is set.
  */
 export function igemStatic(path: string): string {
   const p = path.startsWith('/') ? path : `/${path}`;
   const cdnRoot = normalize(staticBase);
-  const shouldUseCdn =
-    !import.meta.env.DEV && Boolean(cdnRoot) && !isBundledPlaceholderPath(p);
 
-  if (shouldUseCdn) {
+  if (cdnRoot) {
     return `${cdnRoot}${p}`;
   }
   return joinWithBase(p);

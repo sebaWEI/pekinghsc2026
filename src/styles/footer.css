@@ -1,0 +1,168 @@
+.custom-footer {
+  --footer-link-accent: #40d4ff;
+  --footer-link-blue: #6eb5ff;
+}
+
+.custom-footer--home {
+  margin-top: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: #0a0a0a !important;
+}
+
+.custom-footer .footer-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.75s ease,
+    transform 0.75s ease;
+}
+
+.custom-footer .footer-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-footer .footer-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.custom-footer .footer-link-item a {
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.5) !important;
+  text-decoration: none;
+  transition: color 0.22s ease, opacity 0.22s ease;
+}
+
+.custom-footer .footer-link-item a:hover {
+  text-decoration: none;
+}
+
+.custom-footer .footer-link-item:hover a {
+  color: var(--footer-link-accent) !important;
+  opacity: 1;
+}
+
+.custom-footer .footer-link-item.is-dimmed a {
+  opacity: 0.35;
+}
+
+.custom-footer hr {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.footer-sineup {
+  width: 100%;
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+  padding-bottom: clamp(0.35rem, 1.2vw, 0.85rem);
+  overflow: visible;
+  user-select: none;
+}
+
+.footer-sineup__measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+  font-family: 'Orbitron', 'Outfit', system-ui, sans-serif;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.footer-sineup__stage {
+  position: relative;
+  width: 100%;
+}
+
+.footer-sineup__hitbox {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  display: block;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  text-decoration: none;
+  color: transparent;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.footer-sineup__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.footer-sineup__svg text {
+  font-family: 'Orbitron', 'Outfit', system-ui, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.footer-sineup__glow {
+  paint-order: stroke;
+  stroke: #40d4ff;
+  opacity: 0;
+  filter: url(#footer-sineup-glow-filter);
+  transition: opacity 0.55s ease;
+  will-change: opacity;
+}
+
+.footer-sineup__stroke {
+  paint-order: stroke;
+  stroke: #3a5f86;
+  stroke-opacity: 0.42;
+  transition:
+    stroke 0.5s ease,
+    stroke-opacity 0.5s ease;
+}
+
+.footer-sineup__stage.is-active .footer-sineup__glow {
+  stroke: url(#footer-sineup-edge-shine);
+  opacity: 0.82;
+  animation: footer-sineup-halo-breathe 2.8s ease-in-out 0.5s infinite;
+}
+
+.footer-sineup__stage.is-active .footer-sineup__stroke {
+  stroke: url(#footer-sineup-edge-shine);
+  stroke-opacity: 1;
+}
+
+.footer-sineup__fill {
+  opacity: 1;
+}
+
+@keyframes footer-sineup-halo-breathe {
+  0%,
+  100% {
+    opacity: 0.76;
+  }
+
+  50% {
+    opacity: 0.98;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-sineup__glow {
+    transition-duration: 0.2s;
+    animation: none !important;
+  }
+
+  .footer-sineup__stroke {
+    transition-duration: 0.2s;
+  }
+
+  .footer-sineup__stage.is-active .footer-sineup__stroke {
+    stroke: #40d4ff;
+  }
+}

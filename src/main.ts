@@ -29,12 +29,12 @@ loadingScreen.show();
 
 /** Known additional image URLs not captured by walking WEB_NARRATIVE */
 const STATIC_IMAGE_URLS: string[] = [
-  './images/mRNA.svg',
-  './images/mRNA_sine2.svg',
-  './images/60s.svg',
-  './images/40s.svg',
-  './images/chrom.svg',
-  './images/sineup.svg',
+  igemStatic('/images/mRNA.svg'),
+  igemStatic('/images/mRNA_sine2.svg'),
+  igemStatic('/images/60s.svg'),
+  igemStatic('/images/40s.svg'),
+  igemStatic('/images/chrom.svg'),
+  igemStatic('/images/sineup.svg'),
 ];
 
 // Collect all narrative images + static images, preload in parallel
@@ -1857,6 +1857,16 @@ function storeFollowHeroReached(): void {
   }
 }
 
+function goToHero(): void {
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  if (interactionState.mode === 'focus') {
+    exitPartFocus();
+  }
+  if (hasStoredFollowHero() && phase !== 'follow') {
+    applyStoredFollowHeroState();
+  }
+}
+
 function applyStoredFollowHeroState(): void {
   if (!hasStoredFollowHero()) return;
   phase = 'follow';
@@ -1886,6 +1896,7 @@ function applyStoredFollowHeroState(): void {
 updateHintState('locked');
 setRnaOpacity(0);
 applyStoredFollowHeroState();
+window.addEventListener('igem:go-hero', goToHero);
 
 function beginTransitionToFollow(): void {
   if (phase !== 'ready' || !readyInteractive) return;
@@ -1961,8 +1972,17 @@ function updateMorphParticles(progress: number): void {
   posAttr.needsUpdate = true;
 }
 
+function isWikiPageActive(): boolean {
+  if (document.body.classList.contains('is-wiki-page')) return true;
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  return segments.length >= 2;
+}
+
 function animate(): void {
   requestAnimationFrame(animate);
+  if (isWikiPageActive()) {
+    return;
+  }
   const dt = Math.min(clock.getDelta(), 0.1);
 
   const elapsed = clock.getElapsedTime();

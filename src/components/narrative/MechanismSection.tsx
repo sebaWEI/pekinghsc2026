@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { igemStatic } from '../../content/igemAssets';
 import { mountMechanismScroll } from '../../narrative/mechanismScroll';
 
 /**
@@ -96,7 +97,7 @@ export function MechanismSection() {
     mrnaHost.className = 'mechanism__mrna-host';
     const mrnaRotor = document.createElement('div');
     mrnaRotor.className = 'mechanism__mrna-rotor';
-    mrnaRotor.appendChild(img('mechanism__mrna', './images/mRNA.svg', '', true));
+    mrnaRotor.appendChild(img('mechanism__mrna', igemStatic('/images/mRNA.svg'), '', true));
     const mrnaCenter = document.createElement('span');
     mrnaCenter.className = 'mechanism__mrna-center';
     mrnaCenter.setAttribute('aria-hidden', 'true');
@@ -112,7 +113,7 @@ export function MechanismSection() {
     const mrnaSineHost = document.createElement('div');
     mrnaSineHost.className = 'mechanism__mrna-sine-host';
     mrnaSineHost.appendChild(
-      img('mechanism__mrna-sine', './images/mRNA_sine2.svg', '', true),
+      img('mechanism__mrna-sine', igemStatic('/images/mRNA_sine2.svg'), '', true),
     );
     const sineTip = document.createElement('span');
     sineTip.className = 'mechanism__sine-tip';
@@ -122,10 +123,10 @@ export function MechanismSection() {
 
     // Ribosomal subunits
     stage.appendChild(
-      img('mechanism__sub60', './images/60s.svg', '60S ribosomal subunit'),
+      img('mechanism__sub60', igemStatic('/images/60s.svg'), '60S ribosomal subunit'),
     );
     stage.appendChild(
-      img('mechanism__sub40', './images/40s.svg', '40S ribosomal subunit'),
+      img('mechanism__sub40', igemStatic('/images/40s.svg'), '40S ribosomal subunit'),
     );
 
     host.appendChild(section);

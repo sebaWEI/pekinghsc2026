@@ -18,6 +18,18 @@ This file tracks third-party assets used in the Wiki and the license status requ
 - `images/emsa-gel-results.jpg`
 - `videos/cryo-em-rna-protein-complex.mp4`
 
+## Web Fonts (SIL Open Font License 1.1)
+Hosted on iGEM CDN (`static.igem.wiki/teams/2026/pekinghsc/assets/fonts/`).
+Referenced from `src/styles/fonts.css` via `@font-face` (no Google Fonts at runtime).
+Prepare upload bundle: `npm run prepare:fonts` → upload `uploads/fonts/*.woff2` via [iGEM Uploads](https://teams.igem.org/go/deliverables/wiki/uploads).
+
+| Font | License | Source |
+|------|---------|--------|
+| DM Serif Display | SIL OFL 1.1 | https://fonts.google.com/specimen/DM+Serif+Display |
+| Inter | SIL OFL 1.1 | https://rsms.me/inter/ |
+| Orbitron | SIL OFL 1.1 | https://fonts.google.com/specimen/Orbitron |
+| Outfit | SIL OFL 1.1 | https://fonts.google.com/specimen/Outfit |
+
 ## Open-Source Dependencies (NPM)
 - `three` (MIT) — https://github.com/mrdoob/three.js
 - `vite` (MIT) — https://github.com/vitejs/vite

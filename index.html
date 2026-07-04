@@ -2,23 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;700;800&family=Outfit:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="shortcut icon"
+      href="https://static.igem.wiki/common/icons/favicons/igem-2022.svg"
+      type="image/x-icon"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PKU iGEM 2026 — Reprogramming Translation</title>
+    <title>%VITE_TEAM_NAME% - iGEM %VITE_TEAM_YEAR%</title>
     <link rel="stylesheet" href="/src/tailwind.css" />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <!-- Hero 3D canvas -->
-    <canvas id="hero-canvas" role="img" aria-label="Interactive 3D RNA model of SINEB2-ChromDel"></canvas>
+    <!-- Cinematic hero shell (Home route only; hidden on other routes via body.is-wiki-page) -->
+    <canvas
+      id="hero-canvas"
+      role="img"
+      aria-label="Interactive 3D RNA model of SINEB2-ChromDel"
+    ></canvas>
 
-    <!-- Hero title + status -->
     <div class="hero-intro-stack">
       <div id="overlay">
         <h1>SINEB2–ChromDel</h1>
@@ -26,13 +27,10 @@
       </div>
       <div id="click-hint">
         <span class="hint-ring"></span>
-        <span class="hint-text" id="hint-text">
-          Assembling the RNA machinery…
-        </span>
+        <span class="hint-text" id="hint-text">Assembling the RNA machinery…</span>
       </div>
     </div>
 
-    <!-- Main showcase tagline -->
     <div id="hero-showcase-tagline" class="hero-showcase-tagline" aria-hidden="true">
       <h2 class="hero-showcase-tagline__title">Reprogramming Translation</h2>
       <p class="hero-showcase-tagline__lead">
@@ -40,16 +38,12 @@
       </p>
     </div>
 
-    <!-- Scroll explore hint -->
     <p id="scroll-explore-hint" class="scroll-explore-hint" aria-hidden="true">
       <span class="scroll-explore-hint__chev" aria-hidden="true"></span>
       <span class="scroll-explore-hint__text">Scroll to explore</span>
     </p>
 
-    <!-- React renders <main class="story" id="story"> here -->
-    <div id="react-root"></div>
-
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script defer src="/compliance-footer.js"></script>
   </body>
 </html>
